@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://sparkparis.github.io/"/>
-  <updated>2020-11-05T07:50:41.827Z</updated>
+  <updated>2020-11-05T07:54:05.952Z</updated>
   <id>https://sparkparis.github.io/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Pytorch1-可视化</title>
+    <title>Pytorch-可视化小结</title>
     <link href="https://sparkparis.github.io/2020/11/05/Pytorch1-%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
     <id>https://sparkparis.github.io/2020/11/05/Pytorch1-%E5%8F%AF%E8%A7%86%E5%8C%96/</id>
     <published>2020-11-05T02:52:55.000Z</published>
-    <updated>2020-11-05T07:50:41.827Z</updated>
+    <updated>2020-11-05T07:54:05.952Z</updated>
     
     <content type="html"><![CDATA[<meta name="referrer" content="no-referrer"><a id="more"></a><h1 id="1-pytorch可视化"><a href="#1-pytorch可视化" class="headerlink" title="1. pytorch可视化"></a>1. pytorch可视化</h1><h2 id="1-1-torchviz"><a href="#1-1-torchviz" class="headerlink" title="1.1. torchviz"></a>1.1. <a href="https://github.com/szagoruyko/pytorchviz" target="_blank" rel="noopener">torchviz</a></h2><ul><li><p>安装</p><ul><li><p>安装<a href="http://www.graphviz.org/" target="_blank" rel="noopener">graphviz</a>并配置在系统的环境变量(系统-&gt;高级设置-&gt;环境变量-&gt;…./bin</p><ul><li><code>dot -version</code>在命令行窗口中验证是否安装成功</li></ul></li><li><pre><code>pip install torchviz<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  - python环境中安装 &#96;pip install graphviz&#96;</span><br><span class="line"></span><br><span class="line">  - 验证出现如下界面表示安装成功</span><br><span class="line"></span><br><span class="line">    &lt;img src&#x3D;&quot;Pytorch1-可视化&#x2F;1604545297169.png&quot; alt&#x3D;&quot;1604545297169&quot; style&#x3D;&quot;zoom:33%;&quot; &#x2F;&gt;</span><br><span class="line"></span><br><span class="line">- 使用</span><br></pre></td></tr></table></figure></code></pre></li></ul><p>import torch<br>from torch import nn<br>from torchviz import make_dot, make_dot_from_trace</p><p>model = nn.Sequential()<br>model.add_module(‘W0’, nn.Linear(8, 16))<br>model.add_module(‘tanh’, nn.Tanh())<br>model.add_module(‘W1’, nn.Linear(16, 1))</p><p>x = torch.randn(1, 8)</p><p>vis_graph = make_dot(model(x), params=dict(model.named_parameters()))<br>vis_graph.view()  # 会在当前目录下保存一个“Digraph.gv.pdf”文件，并在默认浏览器中打开</p><h1 id="with-torch-onnx-set-training-model-False-版本兼容性问题这里的onnx会报错"><a href="#with-torch-onnx-set-training-model-False-版本兼容性问题这里的onnx会报错" class="headerlink" title="with torch.onnx.set_training(model, False): # 版本兼容性问题这里的onnx会报错"></a>with torch.onnx.set_training(model, False): # 版本兼容性问题这里的onnx会报错</h1><h1 id="trace-torch-jit-get-trace-graph-model-args-x"><a href="#trace-torch-jit-get-trace-graph-model-args-x" class="headerlink" title="trace, _ = torch.jit.get_trace_graph(model, args=(x,))"></a>trace, _ = torch.jit.get_trace_graph(model, args=(x,))</h1><h1 id="make-dot-from-trace-trace"><a href="#make-dot-from-trace-trace" class="headerlink" title="make_dot_from_trace(trace)"></a>make_dot_from_trace(trace)</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  &lt;img src&#x3D;&quot;Pytorch1-可视化&#x2F;1604547067648.png&quot; alt&#x3D;&quot;1604547067648&quot; style&#x3D;&quot;zoom:50%;&quot; &#x2F;&gt;</span><br><span class="line"></span><br><span class="line">## 1.2. [torchsummary](https:&#x2F;&#x2F;github.com&#x2F;SparkParis&#x2F;pytorch-summary)</span><br><span class="line"></span><br><span class="line">- 安装</span><br></pre></td></tr></table></figure><p>pip install torchsummary</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 使用</span><br></pre></td></tr></table></figure><p>from torchsummary import summary<br>summary(your_model, input_size=(channels, H, W))</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure><p>class Net(nn.Module):<br>  def <strong>init</strong>(self):</p><pre><code>super(Net, self).__init__()self.conv1 = nn.Conv2d(1, 10, kernel_size=5)self.conv2 = nn.Conv2d(10, 20, kernel_size=5)self.conv2_drop = nn.Dropout2d()self.fc1 = nn.Linear(320, 50)self.fc2 = nn.Linear(50, 10)</code></pre><p>  def forward(self, x):</p><pre><code>x = F.relu(F.max_pool2d(self.conv1(x), 2))x = F.relu(F.max_pool2d(self.conv2_drop(self.conv2(x)), 2))x = x.view(-1, 320)x = F.relu(self.fc1(x))x = F.dropout(x, training=self.training)x = self.fc2(x)return F.log_softmax(x, dim=1)</code></pre></li></ul><p>device = torch.device(“cuda” if torch.cuda.is_available() else “cpu”) # PyTorch v0.4.0<br>model = Net().to(device)</p><p>summary(model, (1, 28, 28))</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 结果输出</span><br></pre></td></tr></table></figure><hr><pre><code>Layer (type)               Output Shape         Param #</code></pre><p>  ================================================================<br>              Conv2d-1           [-1, 10, 24, 24]             260<br>              Conv2d-2             [-1, 20, 8, 8]           5,020<br>           Dropout2d-3             [-1, 20, 8, 8]               0<br>              Linear-4                   [-1, 50]          16,050<br>              Linear-5                   [-1, 10]             510<br>  ================================================================<br>  Total params: 21,840<br>  Trainable params: 21,840<br>  Non-trainable params: 0</p><hr><p>  Input size (MB): 0.00<br>  Forward/backward pass size (MB): 0.06<br>  Params size (MB): 0.08<br>  Estimated Total Size (MB): 0.15</p><hr>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 1.3. [netron](https:&#x2F;&#x2F;netron.app&#x2F;)</span><br><span class="line"></span><br><span class="line">- 使用方法:</span><br><span class="line">  - 1.直接将保存的模型在https:&#x2F;&#x2F;netron.app&#x2F;网站中打开即可</span><br><span class="line">  - 2.&#96;pip install netron&#96;</span><br><span class="line"></span><br><span class="line">- 第二种方法的使用</span><br></pre></td></tr></table></figure><p>  ‘’’<br>  可视化netron:<br>  pip install netron<br>  ‘’’<br>  import torch<br>  import torch.nn as nn<br>  import torch.nn.functional as F<br>  import torch.onnx</p><p>  import netron</p><p>  class model(nn.Module):<br>      def <strong>init</strong>(self):<br>          super(model, self).<strong>init</strong>()<br>          self.block1 = nn.Sequential(<br>              nn.Conv2d(64, 64, 3, padding=1, bias=False),<br>              nn.BatchNorm2d(64),<br>              nn.ReLU(inplace=True),<br>              nn.Conv2d(64, 32, 1, bias=False),<br>              nn.BatchNorm2d(32),<br>              nn.ReLU(inplace=True),<br>              nn.Conv2d(32, 64, 3, padding=1, bias=False),<br>              nn.BatchNorm2d(64)<br>          )</p><pre><code>    self.conv1 = nn.Conv2d(3, 64, 3, padding=1, bias=False)  # 64*3*3*3(feature_map/filter/weight   )    self.output = nn.Sequential(        nn.Conv2d(64, 1, 3, padding=1, bias=True),        nn.Sigmoid()    )def forward(self, x):    x = self.conv1(x)    identity = x    x = F.relu(self.block1(x) + identity)    x = self.output(x)    return x</code></pre><p>  d = torch.rand(1, 3, 416, 416)<br>  m = model()<br>  o = m(d)</p><p>  onnx_path = “onnx_model_name.onnx”</p><h1 id="保存导出模型模型"><a href="#保存导出模型模型" class="headerlink" title="保存导出模型模型"></a>保存导出模型模型</h1><p>  torch.onnx.export(m, d, onnx_path)</p><h1 id="打开模型显示数据"><a href="#打开模型显示数据" class="headerlink" title="打开模型显示数据"></a>打开模型显示数据</h1><p>  netron.start(onnx_path)</p><p>  ```</p><p>  运行之后结果显示</p><p><img src="/2020/11/05/Pytorch1-%E5%8F%AF%E8%A7%86%E5%8C%96/1604562037021.png" alt="1604562037021"></p>]]></content>
     
@@ -44,6 +44,8 @@
       <category term="graph" scheme="https://sparkparis.github.io/tags/graph/"/>
     
       <category term="summary" scheme="https://sparkparis.github.io/tags/summary/"/>
+    
+      <category term="netron" scheme="https://sparkparis.github.io/tags/netron/"/>
     
   </entry>
   
@@ -94,9 +96,9 @@
       <category term="JavaScript" scheme="https://sparkparis.github.io/categories/JavaScript/"/>
     
     
-      <category term="前端" scheme="https://sparkparis.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
-    
       <category term="js" scheme="https://sparkparis.github.io/tags/js/"/>
+    
+      <category term="前端" scheme="https://sparkparis.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
@@ -250,9 +252,9 @@ vueshop项目是通过vue框架+elementui实现的后台管理系统的梳理,�
       <category term="Linux&amp;Config" scheme="https://sparkparis.github.io/categories/Linux-Config/"/>
     
     
-      <category term="随笔" scheme="https://sparkparis.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
-    
       <category term="mongodb" scheme="https://sparkparis.github.io/tags/mongodb/"/>
+    
+      <category term="随笔" scheme="https://sparkparis.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
     
       <category term="mysql" scheme="https://sparkparis.github.io/tags/mysql/"/>
     
@@ -284,11 +286,11 @@ vueshop项目是通过vue框架+elementui实现的后台管理系统的梳理,�
       <category term="Vue" scheme="https://sparkparis.github.io/categories/Vue/"/>
     
     
-      <category term="webpack" scheme="https://sparkparis.github.io/tags/webpack/"/>
-    
       <category term="vue" scheme="https://sparkparis.github.io/tags/vue/"/>
     
       <category term="elementui" scheme="https://sparkparis.github.io/tags/elementui/"/>
+    
+      <category term="webpack" scheme="https://sparkparis.github.io/tags/webpack/"/>
     
   </entry>
   
@@ -424,9 +426,9 @@ Vue CLI 3详解,箭头函数的补充,element-ui插件的使用
       <category term="Vue" scheme="https://sparkparis.github.io/categories/Vue/"/>
     
     
-      <category term="前端" scheme="https://sparkparis.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
-    
       <category term="js" scheme="https://sparkparis.github.io/tags/js/"/>
+    
+      <category term="前端" scheme="https://sparkparis.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
     
       <category term="vuecli3" scheme="https://sparkparis.github.io/tags/vuecli3/"/>
     
@@ -452,9 +454,9 @@ Vue-CLI相关介绍和Vue CLI2基本使用
       <category term="Vue" scheme="https://sparkparis.github.io/categories/Vue/"/>
     
     
-      <category term="前端" scheme="https://sparkparis.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
-    
       <category term="js" scheme="https://sparkparis.github.io/tags/js/"/>
+    
+      <category term="前端" scheme="https://sparkparis.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
     
       <category term="vue-cli" scheme="https://sparkparis.github.io/tags/vue-cli/"/>
     
@@ -480,9 +482,9 @@ webpack的详细学习,安装和使用,模块化的开发,vue的配置
       <category term="Vue" scheme="https://sparkparis.github.io/categories/Vue/"/>
     
     
-      <category term="前端" scheme="https://sparkparis.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
-    
       <category term="js" scheme="https://sparkparis.github.io/tags/js/"/>
+    
+      <category term="前端" scheme="https://sparkparis.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
     
       <category term="webpack" scheme="https://sparkparis.github.io/tags/webpack/"/>
     
@@ -510,9 +512,9 @@ webpack的详细学习,安装和使用,模块化的开发,vue的配置
       <category term="Vue" scheme="https://sparkparis.github.io/categories/Vue/"/>
     
     
-      <category term="前端" scheme="https://sparkparis.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
-    
       <category term="js" scheme="https://sparkparis.github.io/tags/js/"/>
+    
+      <category term="前端" scheme="https://sparkparis.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
     
       <category term="commonJs" scheme="https://sparkparis.github.io/tags/commonJs/"/>
     
@@ -538,9 +540,9 @@ Vue中组件化开发,组件通信,组件访问,插槽slot
       <category term="Vue" scheme="https://sparkparis.github.io/categories/Vue/"/>
     
     
-      <category term="前端" scheme="https://sparkparis.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
-    
       <category term="js" scheme="https://sparkparis.github.io/tags/js/"/>
+    
+      <category term="前端" scheme="https://sparkparis.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
     
       <category term="vue" scheme="https://sparkparis.github.io/tags/vue/"/>
     
