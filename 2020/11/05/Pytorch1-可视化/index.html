@@ -16,7 +16,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://sparkparis.github.io/2020/11/05/Pytorch1-%E5%8F%AF%E8%A7%86%E5%8C%96/1604562037021.png">
 <meta property="article:published_time" content="2020-11-05T02:52:55.000Z">
-<meta property="article:modified_time" content="2020-11-05T07:54:05.952Z">
+<meta property="article:modified_time" content="2020-11-05T07:57:48.202Z">
 <meta property="article:author" content="SparkParis">
 <meta property="article:tag" content="随笔">
 <meta property="article:tag" content="pytorch">
@@ -236,9 +236,11 @@
 </li>
 <li><pre><code>pip install torchviz
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  - python环境中安装 &#96;pip install graphviz&#96;</span><br><span class="line"></span><br><span class="line">  - 验证出现如下界面表示安装成功</span><br><span class="line"></span><br><span class="line">    &lt;img src&#x3D;&quot;Pytorch1-可视化&#x2F;1604545297169.png&quot; alt&#x3D;&quot;1604545297169&quot; style&#x3D;&quot;zoom:33%;&quot; &#x2F;&gt;</span><br><span class="line"></span><br><span class="line">- 使用</span><br></pre></td></tr></table></figure>
+import torch
+from torch import nn
+from torchviz import make_dot, make_dot_from_trace
 </code></pre></li>
 </ul>
-<p>import torch<br>from torch import nn<br>from torchviz import make_dot, make_dot_from_trace</p>
 <p>model = nn.Sequential()<br>model.add_module(‘W0’, nn.Linear(8, 16))<br>model.add_module(‘tanh’, nn.Tanh())<br>model.add_module(‘W1’, nn.Linear(16, 1))</p>
 <p>x = torch.randn(1, 8)</p>
 <p>vis_graph = make_dot(model(x), params=dict(model.named_parameters()))<br>vis_graph.view()  # 会在当前目录下保存一个“Digraph.gv.pdf”文件，并在默认浏览器中打开</p>
@@ -246,7 +248,7 @@
 <p>pip install torchsummary</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 使用</span><br></pre></td></tr></table></figure>
 <p>from torchsummary import summary<br>summary(your_model, input_size=(channels, H, W))</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- 代码实现</span><br></pre></td></tr></table></figure>
 <p>class Net(nn.Module):<br>  def <strong>init</strong>(self):</p>
 <pre><code>super(Net, self).__init__()
 self.conv1 = nn.Conv2d(1, 10, kernel_size=5)
@@ -270,8 +272,8 @@ return F.log_softmax(x, dim=1)</code></pre></li>
 <hr>
 <p>  Input size (MB): 0.00<br>  Forward/backward pass size (MB): 0.06<br>  Params size (MB): 0.08<br>  Estimated Total Size (MB): 0.15</p>
 <hr>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 1.3. [netron](https:&#x2F;&#x2F;netron.app&#x2F;)</span><br><span class="line"></span><br><span class="line">- 使用方法:</span><br><span class="line">  - 1.直接将保存的模型在https:&#x2F;&#x2F;netron.app&#x2F;网站中打开即可</span><br><span class="line">  - 2.&#96;pip install netron&#96;</span><br><span class="line"></span><br><span class="line">- 第二种方法的使用</span><br></pre></td></tr></table></figure>
-<p>  ‘’’<br>  可视化netron:<br>  pip install netron<br>  ‘’’<br>  import torch<br>  import torch.nn as nn<br>  import torch.nn.functional as F<br>  import torch.onnx</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 1.3. [netron](https:&#x2F;&#x2F;netron.app&#x2F;)</span><br><span class="line"></span><br><span class="line">- 使用方法:</span><br><span class="line">  - 1.直接将保存的模型在https:&#x2F;&#x2F;netron.app&#x2F;网站中打开即可</span><br><span class="line">  - 2.</span><br></pre></td></tr></table></figure>
+<p>  pip install netron<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 第二种方法的使用</span><br></pre></td></tr></table></figure><br>  ‘’’<br>  可视化netron:<br>  pip install netron<br>  ‘’’<br>  import torch<br>  import torch.nn as nn<br>  import torch.nn.functional as F<br>  import torch.onnx</p>
 <p>  import netron</p>
 <p>  class model(nn.Module):<br>      def <strong>init</strong>(self):<br>          super(model, self).<strong>init</strong>()<br>          self.block1 = nn.Sequential(<br>              nn.Conv2d(64, 64, 3, padding=1, bias=False),<br>              nn.BatchNorm2d(64),<br>              nn.ReLU(inplace=True),<br>              nn.Conv2d(64, 32, 1, bias=False),<br>              nn.BatchNorm2d(32),<br>              nn.ReLU(inplace=True),<br>              nn.Conv2d(32, 64, 3, padding=1, bias=False),<br>              nn.BatchNorm2d(64)<br>          )</p>
 <pre><code>    self.conv1 = nn.Conv2d(3, 64, 3, padding=1, bias=False)  # 64*3*3*3(feature_map/filter/weight   )
@@ -625,10 +627,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">cors</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
               </li>
              
@@ -641,11 +639,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">art-template</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">cors</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">jquery</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">art-template</a>
+                <a href="javascript:void(0)" class="js-tag color3">后端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -661,14 +671,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">后端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ES6</a>
               </li>
              
@@ -681,19 +683,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">MongoDB</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">template</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">async</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">http</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">MongoDB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">template</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -714,6 +716,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">netron</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">typora</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">md</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -742,14 +752,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">vue-cli</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">typora</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">md</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -785,11 +787,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+                <a href="javascript:void(0)" class="js-tag color4">anaconda</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">anaconda</a>
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -829,11 +831,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面试</a>
+                <a href="javascript:void(0)" class="js-tag color1">algorithom</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">algorithom</a>
+                <a href="javascript:void(0)" class="js-tag color3">面试</a>
               </li>
             
             <div class="clearfix"></div>
