@@ -22,12 +22,17 @@
 <meta property="og:image" content="https://sparkparis.github.io/2020/11/20/config-DL/1606187323642.png">
 <meta property="og:image" content="https://sparkparis.github.io/2020/11/20/config-DL/1606187443513.png">
 <meta property="og:image" content="https://sparkparis.github.io/2020/11/20/config-DL/1606273407164.png">
+<meta property="og:image" content="https://sparkparis.github.io/2020/11/20/config-DL/1606292135498.png">
+<meta property="og:image" content="https://sparkparis.github.io/2020/11/20/config-DL/1606291477397.png">
+<meta property="og:image" content="https://sparkparis.github.io/2020/11/20/config-DL/1606291755355.png">
 <meta property="og:image" content="https://sparkparis.github.io/2020/11/20/config-DL/1606202260548.png">
+<meta property="og:image" content="https://sparkparis.github.io/2020/11/20/config-DL/1606291999955.png">
 <meta property="og:image" content="https://sparkparis.github.io/2020/11/20/config-DL/1606207755895.png">
 <meta property="og:image" content="https://sparkparis.github.io/2020/11/20/config-DL/1606207865752.png">
 <meta property="og:image" content="https://sparkparis.github.io/2020/11/20/config-DL/1606207923494.png">
+<meta property="og:image" content="https://sparkparis.github.io/2020/11/20/config-DL/1606293360449.png">
 <meta property="article:published_time" content="2020-11-20T03:10:07.000Z">
-<meta property="article:modified_time" content="2020-11-25T03:04:05.319Z">
+<meta property="article:modified_time" content="2020-11-25T08:37:37.644Z">
 <meta property="article:author" content="SparkParis">
 <meta property="article:tag" content="pytorch">
 <meta property="article:tag" content="ubuntu18">
@@ -289,6 +294,9 @@
 </li>
 <li><p>查看安装是否成功<code>nvidia-smi</code></p>
 <img src="/2020/11/20/config-DL/1606187323642.png" alt="1606187323642" style="zoom:33%;">
+</li>
+<li><p>卸载驱动的方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo .&#x2F;NVIDIA-Linux-x86_64-430.50.run --uninstall</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
@@ -313,12 +321,18 @@
 <ul>
 <li><p>下载并安装</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Run &#96;sudo sh cuda_10.1.168_418.67_linux.run&#96; # 安装的时候注意在是否安装drive处选择no</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/11/20/config-DL/1606292135498.png" alt="1606292135498" style="zoom:33%;">
+
+<p><img src="/2020/11/20/config-DL/1606291477397.png" alt="1606291477397"></p>
 </li>
 <li><p>安装完成之后设置环境变量,终端输入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">source ~&#x2F;.bashrc</span><br><span class="line">nvcc --version</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim  ~&#x2F;.bashrc</span><br><span class="line">source ~&#x2F;.bashrc</span><br><span class="line">nvcc --version</span><br></pre></td></tr></table></figure>
 
 <p>输入内容</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export LD_LIBRARY_PATH&#x3D;$LD_LIBRARY_PATH:&#x2F;usr&#x2F;local&#x2F;cuda-9.0&#x2F;lib64</span><br><span class="line">export PATH&#x3D;$PATH:&#x2F;usr&#x2F;local&#x2F;cuda-9.0&#x2F;bin</span><br><span class="line">export CUDA_HOME&#x3D;$CUDA_HOME:&#x2F;usr&#x2F;local&#x2F;cuda-9.0</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export LD_LIBRARY_PATH&#x3D;$LD_LIBRARY_PATH:&#x2F;usr&#x2F;local&#x2F;cuda-10.1&#x2F;lib64</span><br><span class="line">export PATH&#x3D;$PATH:&#x2F;usr&#x2F;local&#x2F;cuda-10.1&#x2F;bin</span><br><span class="line">export CUDA_HOME&#x3D;$CUDA_HOME:&#x2F;usr&#x2F;local&#x2F;cuda-10.1&#x2F;</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;cuda-10.1&#x2F;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/11/20/config-DL/1606291755355.png" alt="1606291755355"></p>
 </li>
 <li><p>cuda版本查看</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l &#x2F;usr&#x2F;local | grep cuda</span><br></pre></td></tr></table></figure>
@@ -351,7 +365,7 @@
 <img src="/2020/11/20/config-DL/1606202260548.png" alt="1606202260548" style="zoom:50%;">
 </li>
 <li><p>下载之后需要将后缀更改为tgz然后在进行解压</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mv cudnn-9.1-linux-x64-v7.solitairetheme8 cudnn-7.0.5.tgz</span><br><span class="line">tar -xvzf cudnn-7.0.5.tgz</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mv cudnn-10.1-linux-x64-v7.6.5.32.solitairetheme8 cudnn-7.6.5.tgz</span><br><span class="line">tar -xvzf cudnn-7.6.5.tgz</span><br></pre></td></tr></table></figure>
 
 <p>注意这里下载的库不需要编译, 只需要将解压缩出来的so库和头文件拷贝到系统目录下即可。  </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo cp cuda&#x2F;include&#x2F;cudnn.h &#x2F;usr&#x2F;local&#x2F;cuda&#x2F;include&#x2F;</span><br><span class="line">sudo cp cuda&#x2F;lib64&#x2F;libcudnn* &#x2F;usr&#x2F;local&#x2F;cuda&#x2F;lib64&#x2F;</span><br><span class="line">sudo chmod a+r &#x2F;usr&#x2F;local&#x2F;cuda&#x2F;include&#x2F;cudnn.h </span><br><span class="line">sudo chmod a+r &#x2F;usr&#x2F;local&#x2F;cuda&#x2F;lib64&#x2F;libcudnn*</span><br></pre></td></tr></table></figure>
@@ -361,6 +375,7 @@
 
 </li>
 </ul>
+<p><img src="/2020/11/20/config-DL/1606291999955.png" alt="1606291999955"></p>
 <h2 id="5-pipenv安装虚拟环境"><a href="#5-pipenv安装虚拟环境" class="headerlink" title="5.pipenv安装虚拟环境"></a>5.pipenv安装虚拟环境</h2><ul>
 <li><p>安装pipenv</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># pip3命令不存在先安装(存在略过)</span><br><span class="line">sudo apt-get install python3-pip</span><br><span class="line"># 查看virtualenv是否存在</span><br><span class="line">virtualenv --version</span><br><span class="line"># 安装virtualenv和virtualenvwrapper</span><br><span class="line">sudo pip3 install virtualenv</span><br><span class="line">sudo pip3 install virtualenvwrapper</span><br></pre></td></tr></table></figure>
@@ -405,7 +420,21 @@
 <li>第一种方式创建之后的路径:    <code>home/lilei/.virtualenvs/pytorch</code></li>
 <li>第二种方式创建路径:在当前的指定路径下面</li>
 </ul>
-<h2 id="6-安装pytorch"><a href="#6-安装pytorch" class="headerlink" title="6.安装pytorch"></a>6.安装pytorch</h2>
+<h2 id="6-安装pytorch"><a href="#6-安装pytorch" class="headerlink" title="6.安装pytorch"></a>6.安装pytorch</h2><ul>
+<li><p>安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install torch torchvision</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/11/20/config-DL/1606293360449.png" alt="1606293360449"></p>
+</li>
+</ul>
+<p>安装过程会出现http超时的问题,多尝试几次</p>
+<ul>
+<li><p>测试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 激活虚拟环境</span><br><span class="line">workon pytorch(虚拟环境的名称)</span><br><span class="line"># 输入python环境</span><br><span class="line">python</span><br><span class="line">import torch</span><br><span class="line">torch.cuda.is_available()</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+
     
 
     
@@ -759,11 +788,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jquery</a>
+                <a href="javascript:void(0)" class="js-tag color3">art-template</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">art-template</a>
+                <a href="javascript:void(0)" class="js-tag color2">jquery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -783,10 +812,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Web Worker</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">gulp</a>
               </li>
              
@@ -795,15 +820,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">async</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">http</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">MongoDB</a>
+                <a href="javascript:void(0)" class="js-tag color1">Web Worker</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -811,11 +828,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">typora</a>
+                <a href="javascript:void(0)" class="js-tag color1">async</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">md</a>
+                <a href="javascript:void(0)" class="js-tag color5">http</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -839,7 +856,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+                <a href="javascript:void(0)" class="js-tag color3">MongoDB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">typora</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">md</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -847,11 +872,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">elementui</a>
+                <a href="javascript:void(0)" class="js-tag color5">vuex</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">vuex</a>
+                <a href="javascript:void(0)" class="js-tag color5">elementui</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -859,7 +884,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">es6</a>
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -871,15 +896,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">slot</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">commonJs</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">less</a>
+                <a href="javascript:void(0)" class="js-tag color5">slot</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">es6</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -888,6 +913,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">router</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">less</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -904,6 +933,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">cuda</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -935,23 +972,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">anaconda</a>
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+                <a href="javascript:void(0)" class="js-tag color4">anaconda</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -983,10 +1012,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">algorithom</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">algorithm</a>
               </li>
              
@@ -996,6 +1021,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">面试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">algorithom</a>
               </li>
             
             <div class="clearfix"></div>
