@@ -21,13 +21,13 @@
 <meta property="og:image" content="https://sparkparis.github.io/2020/11/20/config-DL/1606123051399.png">
 <meta property="og:image" content="https://sparkparis.github.io/2020/11/20/config-DL/1606187323642.png">
 <meta property="og:image" content="https://sparkparis.github.io/2020/11/20/config-DL/1606187443513.png">
-<meta property="og:image" content="https://sparkparis.github.io/2020/11/20/config-DL/1606188664235.png">
+<meta property="og:image" content="https://sparkparis.github.io/2020/11/20/config-DL/1606273407164.png">
 <meta property="og:image" content="https://sparkparis.github.io/2020/11/20/config-DL/1606202260548.png">
 <meta property="og:image" content="https://sparkparis.github.io/2020/11/20/config-DL/1606207755895.png">
 <meta property="og:image" content="https://sparkparis.github.io/2020/11/20/config-DL/1606207865752.png">
 <meta property="og:image" content="https://sparkparis.github.io/2020/11/20/config-DL/1606207923494.png">
 <meta property="article:published_time" content="2020-11-20T03:10:07.000Z">
-<meta property="article:modified_time" content="2020-11-25T02:39:19.760Z">
+<meta property="article:modified_time" content="2020-11-25T03:04:05.319Z">
 <meta property="article:author" content="SparkParis">
 <meta property="article:tag" content="pytorch">
 <meta property="article:tag" content="ubuntu18">
@@ -277,19 +277,14 @@
 <ul>
 <li><p><a href="https://www.nvidia.cn/geforce/drivers/" target="_blank" rel="noopener">官网</a>下载驱动,进入所在目录 </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">  cd .&#x2F;home</span><br><span class="line">  sudo chmod a+x NVIDIA-Linux-x86_64-430.50.run # 添加可执行权限</span><br><span class="line">  # 禁用ubuntu自带的驱动</span><br><span class="line">  sudo vim &#x2F;etc&#x2F;modprobe.d&#x2F;blacklist.conf </span><br><span class="line">  # 按g跳到最后添加</span><br><span class="line">  blacklist nouveau</span><br><span class="line">  option nouveau modeset&#x3D;0</span><br><span class="line">  # 保存之后退出,执行 </span><br><span class="line">  sudo update-initramfs -u</span><br><span class="line">  # 重启电脑</span><br><span class="line">  sudo reboot</span><br><span class="line">  # 重启之后不要登录查看禁用是否成功,(什么内容都没有表示)</span><br><span class="line">  lsmod | grep nouveau # 没有任何内容输出表示成功</span><br><span class="line">#安装驱动</span><br><span class="line">  sudo .&#x2F;NVIDIA-Linux-x86_64-430.50.run –no-x-check –no-nouveau-check –no-opengl-files</span><br><span class="line">      –no-x-check安装驱动时关闭X服务</span><br><span class="line">      –no-nouveau-check 安装驱动时禁用nouveau</span><br><span class="line">      –no-opengl-files 只安装驱动文件，不安装OpenGL文件</span><br><span class="line">      重启，并不会出现循环登录的问题</span><br></pre></td></tr></table></figure>
-
-
 </li>
 </ul>
 </li>
-</ul>
+<li><p>可能出现的问题:</p>
 <ul>
-<li>可能出现的问题:<ul>
 <li>Ubuntu系统登录界面变大，并且循环输入正确密码无法进入桌面的解决方案@<a href="https://blog.csdn.net/qq_36427732/article/details/80914653" target="_blank" rel="noopener">https://blog.csdn.net/qq_36427732/article/details/80914653</a></li>
 </ul>
 </li>
-</ul>
-<ul>
 <li><p>重新启动 <code>sudo reboot</code></p>
 </li>
 <li><p>查看安装是否成功<code>nvidia-smi</code></p>
@@ -314,11 +309,10 @@
 <h2 id="3-安装CUDA10-1-CUDNN7-5-1"><a href="#3-安装CUDA10-1-CUDNN7-5-1" class="headerlink" title="3.安装CUDA10.1+CUDNN7.5.1"></a>3.安装CUDA10.1+CUDNN7.5.1</h2><ul>
 <li><a href="https://developer.nvidia.com/cuda-toolkit-archive" target="_blank" rel="noopener">cuda官网</a>下载(需要注册账户)</li>
 </ul>
-<img src="/2020/11/20/config-DL/1606188664235.png" alt="1606188664235" style="zoom:40%;">
-
+<p><img src="/2020/11/20/config-DL/1606273407164.png" alt="1606273407164"></p>
 <ul>
 <li><p>下载并安装</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget http:&#x2F;&#x2F;developer.download.nvidia.com&#x2F;compute&#x2F;cuda&#x2F;10.1&#x2F;Prod&#x2F;local_installers&#x2F;cuda_10.1.243_418.87.00_linux.run</span><br><span class="line">sudo sh cuda_10.1.243_418.87.00_linux.run # 安装的时候注意在是否安装drive处选择no</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Run &#96;sudo sh cuda_10.1.168_418.67_linux.run&#96; # 安装的时候注意在是否安装drive处选择no</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>安装完成之后设置环境变量,终端输入</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">source ~&#x2F;.bashrc</span><br><span class="line">nvcc --version</span><br></pre></td></tr></table></figure>
@@ -733,15 +727,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">error</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -761,11 +751,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jquery</a>
+                <a href="javascript:void(0)" class="js-tag color1">error</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">cors</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jquery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -793,15 +787,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">gulp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ES6</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">template</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">MongoDB</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -813,7 +803,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">gulp</a>
+                <a href="javascript:void(0)" class="js-tag color3">MongoDB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">template</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -822,22 +816,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">md</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">vuex</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">elementui</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">axios</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -865,6 +843,22 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">elementui</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">vuex</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">axios</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">es6</a>
               </li>
              
@@ -877,11 +871,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">commonJs</a>
+                <a href="javascript:void(0)" class="js-tag color5">slot</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">slot</a>
+                <a href="javascript:void(0)" class="js-tag color4">commonJs</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -953,15 +947,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">anaconda</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">vscode</a>
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -981,6 +971,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">vscode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">offer</a>
               </li>
              
@@ -989,15 +983,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">algorithom</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">algorithm</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">sort</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">algorithom</a>
               </li>
              
               <li class="article-tag-list-item">
