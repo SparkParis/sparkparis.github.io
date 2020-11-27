@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://sparkparis.github.io/2020/11/24/config-ubuntu/1606095534388.png">
 <meta property="og:image" content="https://sparkparis.github.io/2020/11/24/config-ubuntu/1606268796489.png">
 <meta property="article:published_time" content="2020-11-24T09:47:06.000Z">
-<meta property="article:modified_time" content="2020-11-25T03:15:33.231Z">
+<meta property="article:modified_time" content="2020-11-27T03:19:00.782Z">
 <meta property="article:author" content="SparkParis">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="centos">
@@ -304,7 +304,7 @@ ubuntu常用命令总结,ssh安装和配置
 </ul>
 </li>
 </ul>
-<h2 id="4-nuhup后台运行命令"><a href="#4-nuhup后台运行命令" class="headerlink" title="4.nuhup后台运行命令"></a>4.nuhup后台运行命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">1.在服务器挂脚本xshell退出后依然执行</span><br><span class="line">sudo nohup python app.py &amp;</span><br><span class="line"></span><br><span class="line">2.nohup使用方式</span><br><span class="line">标准使用格式 </span><br><span class="line">nohup COMMAND &amp;</span><br><span class="line">eg：nohup conmand &gt;myfile.txt 2&gt;1 &amp;</span><br><span class="line"></span><br><span class="line">3.xshell运行python命令常用语句</span><br><span class="line">ctrl+c终止程序运行而非暂停</span><br><span class="line">ctrl+z暂停运行并回到shell提示符</span><br><span class="line">bg+command让程序在后台执行</span><br><span class="line">fg+command搬回前台执行</span><br><span class="line">jobs -l查看任务的编号</span><br><span class="line">kill -STOP直接暂停后台任务</span><br><span class="line">kill -CONT直接恢复后台任务</span><br><span class="line">4.读取nohup的文件</span><br><span class="line">tail  -fn 50 nohup.out</span><br></pre></td></tr></table></figure>
+<h2 id="4-nuhup后台运行命令"><a href="#4-nuhup后台运行命令" class="headerlink" title="4.nuhup后台运行命令"></a>4.nuhup后台运行命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">1.在服务器挂脚本xshell退出后依然执行</span><br><span class="line">sudo nohup python app.py &amp;</span><br><span class="line"></span><br><span class="line">2.nohup使用方式</span><br><span class="line">标准使用格式 </span><br><span class="line">nohup COMMAND &amp;</span><br><span class="line">eg：nohup conmand &gt;myfile.txt 2&gt;1 &amp;</span><br><span class="line">nohup python main.py --lr&#x3D;0.1 --modelname&#x3D;vgg19.pth &gt; .&#x2F;checkpoint&#x2F;vgg19_1.csv 2&gt;&amp;1 &amp;</span><br><span class="line">3.xshell运行python命令常用语句</span><br><span class="line">ctrl+c终止程序运行而非暂停</span><br><span class="line">ctrl+z暂停运行并回到shell提示符</span><br><span class="line">bg+command让程序在后台执行</span><br><span class="line">fg+command搬回前台执行</span><br><span class="line">kill -STOP直接暂停后台任务</span><br><span class="line">kill -CONT直接恢复后台任务</span><br><span class="line">4.读取nohup的文件</span><br><span class="line">tail  -fn 50 nohup.out</span><br><span class="line">5.终端没有关闭的情况下查询进程</span><br><span class="line">jobs -l查看任务的编号</span><br><span class="line">#杀死进程找到任务编号</span><br><span class="line">kill %num</span><br><span class="line">6.终端关闭的情况查询当前进程</span><br><span class="line">ps -aux |grep main.py(运行的文件)</span><br><span class="line">7.杀死进程可以直接通过</span><br><span class="line">kill -9 进程号</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2020/11/24/config-ubuntu/1606268796489.png" alt="1606268796489"></p>
 <h2 id="5-ubuntu之间scp传输文件"><a href="#5-ubuntu之间scp传输文件" class="headerlink" title="5.ubuntu之间scp传输文件"></a>5.ubuntu之间scp传输文件</h2><ul>
@@ -701,27 +701,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -729,15 +709,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">cors</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">art-template</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jquery</a>
+                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -749,6 +721,22 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jquery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">HTML</a>
               </li>
              
@@ -757,7 +745,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">gulp</a>
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">art-template</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">cors</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -769,7 +765,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">template</a>
+                <a href="javascript:void(0)" class="js-tag color5">gulp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -778,6 +774,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">http</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">MongoDB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">template</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -798,10 +802,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">netron</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">MongoDB</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -845,11 +845,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">slot</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">es6</a>
+                <a href="javascript:void(0)" class="js-tag color5">less</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -857,35 +853,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">slot</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">router</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">less</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ubuntu18</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">pipenv</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">dell t640</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">cuda</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color4">es6</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -917,15 +893,39 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ubuntu18</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">pipenv</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">dell t640</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">cuda</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+                <a href="javascript:void(0)" class="js-tag color4">anaconda</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">anaconda</a>
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -949,11 +949,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">offer</a>
+                <a href="javascript:void(0)" class="js-tag color3">ds</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ds</a>
+                <a href="javascript:void(0)" class="js-tag color1">offer</a>
               </li>
              
               <li class="article-tag-list-item">
